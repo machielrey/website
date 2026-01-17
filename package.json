@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "dev:watch": "nodemon --watch src/content --ext md,mdx --exec 'astro dev'",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -14,5 +15,8 @@
     "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.16.11",
     "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }
