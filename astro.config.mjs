@@ -8,7 +8,4 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: 'https://machielreyneke.com',
 	integrations: [mdx(), sitemap()],
-	image: {
-		quality: 90,
-	},
 });
