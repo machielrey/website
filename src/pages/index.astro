@@ -3,53 +3,74 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Hey there</h1>
-			<p>
-				I'm Machiel — product manager, tinkerer, occasional writer. Based in South Africa.
-			</p>
-			<p>
-				I work at <a href="https://www.10x.co.za">10X Investments</a>, building investing tools for regular people. Before that: fire engineering, tech startups, and a lot of learning the hard way.
-			</p>
-			<p>
-				This site is where I put things I've built, things I've learned, and things I'm thinking about.
-			</p>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>Hey there</h1>
+      <p>I'm Machiel — product manager, tinkerer, occasional writer. Based in South Africa.</p>
+      <p>
+        I work at <a href="https://www.10x.co.za">10X Investments</a>, making smart investing
+        accessible to regular people. Before that: fire engineering, tech startups, and a lot of
+        learning the hard way.
+      </p>
+      <p>
+        This site is where I put things I've built, things I've learned, and things I'm thinking
+        about.
+      </p>
 
-			<h2>Projects</h2>
-			<p>
-				Things I've built for myself. Not startups, not products — just tools that solve my own problems.
-			</p>
-			<p>
-				<strong>Slate</strong> — A todo app for ADHD brains. Graph-based task relationships, daily resets, no guilt. Built with AI assistance in three weeks.
-			</p>
-			<p>
-				<strong>Runistry</strong> — Advanced analytics for Garmin runners. Because the default dashboards aren't enough.
-			</p>
-			<p>
-				<strong>Commander's Intent</strong> — AI-powered daily briefing system. Aggregates emails and calendar, synthesizes into actionable morning insights using Claude.
-			</p>
-			<p>
-				<strong>Eskom Dashboards</strong> — Visualizing South African load shedding and power generation data. Because checking schedules wasn't painful enough.
-			</p>
+      <h2>Projects</h2>
+      <p>
+        Things I've built for myself. Not startups, not products — just tools that solve my own
+        problems.
+      </p>
+      <p>
+        <strong>Slate</strong> — A todo app for ADHD brains and their AI assistants. Graph-based task
+        relationships, daily resets, no guilt. Built with Claude Code in three weeks.
+      </p>
+      <p>
+        <strong>Runistry</strong> — Advanced analytics for Garmin runners. Because the default dashboards
+        aren't enough.
+      </p>
+      <p>
+        <strong>Commander's Intent</strong> — AI-powered daily briefing system. Aggregates emails and
+        calendar, synthesizes into actionable morning insights using Claude.
+      </p>
+      <p>
+        <strong>Eskom Dashboards</strong> — Visualizing South African load shedding and power generation
+        data. Because checking schedules wasn't painful enough in 2023.
+      </p>
 
-			<h2>Writing</h2>
-			<p>[Latest posts will go here]</p>
+      <h2>Writing</h2>
+      <ul>
+        {
+          posts.slice(0, 3).map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            </li>
+          ))
+        }
+      </ul>
 
-			<h2>Elsewhere</h2>
-			<ul>
-				<li><a href="https://www.linkedin.com/in/machiel-reyneke/">LinkedIn</a></li>
-				<li><a href="https://github.com/machielreyneke">GitHub</a></li>
-			</ul>
-		</main>
-		<Footer />
-	</body>
+      <h2>Elsewhere</h2>
+      <ul>
+        <li>
+          <a href="https://www.linkedin.com/in/machiel-reyneke/">LinkedIn</a>
+        </li>
+        <li><a href="https://github.com/machielreyneke">GitHub</a></li>
+      </ul>
+    </main>
+    <Footer />
+  </body>
 </html>

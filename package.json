@@ -7,7 +7,8 @@
     "dev:watch": "nodemon --watch src/content --ext md,mdx --exec 'astro dev'",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -17,6 +18,13 @@
     "sharp": "^0.34.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.11"
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.8.0",
+    "prettier-plugin-astro": "^0.14.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,astro,json,md,mdx,css}": "prettier --write"
   }
 }
