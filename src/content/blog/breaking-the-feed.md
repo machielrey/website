@@ -1,7 +1,8 @@
 ---
-title: "Breaking the Feed"
+title: 'Breaking the Feed'
 description: "How two hours of clicking 'Not interested' changed what I build."
 pubDate: 2026-01-17
+tags: ['productivity', 'building', 'personal']
 ---
 
 I've had blogs before. Two, maybe three incarnations. None made it past five posts. They were for readership - for getting people to care about what I write. This one is different. This is me writing for me, documenting things in a way that won't get lost.
