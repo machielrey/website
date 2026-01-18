@@ -51,9 +51,17 @@ description: 'Brief description'
 pubDate: '2026-01-17'
 tags: ['tag1', 'tag2'] # Optional
 draft: true # Optional: hides post in production
-toc: true # Optional: shows table of contents
+toc: true # Optional: shows table of contents (needs h2/h3 headings)
 ---
 ```
+
+### Creating New Posts
+
+When creating a new blog post:
+
+1. **Always confirm draft status** — explicitly state whether the post is set as `draft: true` or ready for publication
+2. **Drafts are visible in dev** (`npm run dev`) but hidden in production
+3. **Verify before publishing** — if removing `draft: true`, confirm with the user that the post is ready to go live
 
 ## Before Committing
 

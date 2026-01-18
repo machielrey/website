@@ -8,7 +8,7 @@ Personal website and blog built with [Astro](https://astro.build), hosted on [Cl
 - **RSS feed** at `/rss.xml`
 - **SEO** — OpenGraph, Twitter cards, JSON-LD structured data
 - **Performance** — Prefetching, view transitions, static output
-- **Analytics** — Cloudflare Web Analytics (optional)
+- **Analytics** — Cloudflare Web Analytics (enabled via CF dashboard)
 - **Dark theme** with syntax highlighting (github-dark)
 
 ## Development
@@ -38,16 +38,6 @@ toc: true # Optional: shows table of contents
 ## Deployment
 
 Cloudflare Pages auto-deploys from the `master` branch.
-
-## Analytics Setup
-
-To enable Cloudflare Web Analytics, add your token to `src/consts.ts`:
-
-```ts
-export const CF_ANALYTICS_TOKEN = 'your-token-here';
-```
-
-Get your token from the Cloudflare dashboard under Analytics > Web Analytics.
 
 ## License
 
