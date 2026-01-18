@@ -1,0 +1,23 @@
+{
+  "version": "0.2",
+  "language": "en-GB",
+  "words": [
+    "Astro",
+    "Cloudflare",
+    "frontmatter",
+    "MCP",
+    "MDX",
+    "Runistry",
+    "Workflowy",
+    "Todoist",
+    "bulletjournal",
+    "standup",
+    "standups",
+    "unfollowing",
+    "anymore",
+    "datasette",
+    "kbd",
+    "precommit"
+  ],
+  "ignorePaths": ["node_modules", "dist", ".astro", "package-lock.json"]
+}

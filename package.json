@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "cspell": "^9.6.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "markdownlint-cli": "^0.47.0",
@@ -29,6 +30,9 @@
   },
   "lint-staged": {
     "*.{js,ts,astro,json,md,mdx,css}": "prettier --write",
-    "*.{md,mdx}": "markdownlint"
+    "*.{md,mdx}": [
+      "markdownlint",
+      "cspell --no-progress"
+    ]
   }
 }
