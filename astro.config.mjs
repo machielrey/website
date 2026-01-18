@@ -8,4 +8,11 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: 'https://machielreyneke.com',
 	integrations: [mdx(), sitemap()],
+	prefetch: true,
+	markdown: {
+		shikiConfig: {
+			theme: 'github-dark',
+			wrap: true,
+		},
+	},
 });

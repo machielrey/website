@@ -49,6 +49,9 @@ Blog posts go in `src/content/blog/` as `.md` or `.mdx` files with frontmatter:
 title: 'Post Title'
 description: 'Brief description'
 pubDate: '2026-01-17'
+tags: ['tag1', 'tag2'] # Optional
+draft: true # Optional: hides post in production
+toc: true # Optional: shows table of contents
 ---
 ```
 

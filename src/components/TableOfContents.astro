@@ -1,0 +1,75 @@
+---
+/**
+ * Table of Contents component.
+ * Renders a nested list of headings with anchor links.
+ */
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Filter to only include h2 and h3 headings
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+{
+  tocHeadings.length > 0 && (
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Contents</h2>
+      <ul>
+        {tocHeadings.map((heading) => (
+          <li class={`toc-level-${heading.depth}`}>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .toc {
+    background: rgba(var(--gray-light), 0.1);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .toc h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+    color: rgb(var(--gray));
+  }
+
+  .toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .toc li {
+    margin: 0.25rem 0;
+  }
+
+  .toc a {
+    color: rgb(var(--gray-dark));
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .toc a:hover {
+    color: rgb(var(--accent));
+  }
+
+  .toc-level-3 {
+    padding-left: 1rem;
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+/**
+ * Structured data component for JSON-LD schema.org markup.
+ * Supports Article (blog posts) and WebSite schemas.
+ */
+
+interface ArticleProps {
+  type: 'article';
+  title: string;
+  description: string;
+  publishedTime: Date;
+  modifiedTime?: Date;
+  url: string;
+  image?: string;
+}
+
+interface WebSiteProps {
+  type: 'website';
+  title: string;
+  description: string;
+  url: string;
+}
+
+type Props = ArticleProps | WebSiteProps;
+
+const props = Astro.props as Props;
+
+function generateSchema(props: Props): object {
+  if (props.type === 'article') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: props.title,
+      description: props.description,
+      datePublished: props.publishedTime.toISOString(),
+      dateModified: (props.modifiedTime ?? props.publishedTime).toISOString(),
+      url: props.url,
+      ...(props.image && { image: props.image }),
+      author: {
+        '@type': 'Person',
+        name: 'Machiel Reyneke',
+        url: 'https://machielreyneke.com/about/',
+      },
+      publisher: {
+        '@type': 'Person',
+        name: 'Machiel Reyneke',
+      },
+    };
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: props.title,
+    description: props.description,
+    url: props.url,
+  };
+}
+
+const schema = generateSchema(props);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
