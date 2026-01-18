@@ -33,7 +33,7 @@ The graph structure matters more than it sounds. When Claude looks at a flat tas
 
 Here's what a real task graph looks like - these are tasks from writing this post:
 
-```
+```text
 ┌──────────────┐      ┌──────────────┐
 │ Update       │◄─────┤ Draft        │
 │ homepage     │      │ intro        │

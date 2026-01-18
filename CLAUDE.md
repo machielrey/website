@@ -11,7 +11,7 @@ Personal website and blog for Machiel Reyneke. Built with Astro, hosted on Cloud
 
 ## Project Structure
 
-```
+```text
 website/
 ├── src/
 │   ├── content/
@@ -66,3 +66,24 @@ Before committing changes, read these key pages to ensure consistency:
 
 - `src/pages/index.astro` — Homepage with intro, projects list, latest posts
 - `src/pages/about.astro` — Full bio and background
+
+## Test-Driven Development
+
+**This project uses strict TDD. Tests come first.**
+
+1. Write tests based on expected input/output before implementation
+2. Tests must cover basic functionality AND edge cases
+3. Run tests, confirm they fail
+4. Implement until tests pass
+5. Never cut corners on tests
+
+## Multi-PR Features
+
+For features requiring multiple PRs:
+
+1. Create `docs/feature_plans/YYYY-MM-feature_name.md`
+2. Document scope and PR breakdown
+3. Update as PRs merge
+4. Delete when feature is deployed
+
+See `docs/feature_plans/README.md` for template.

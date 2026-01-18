@@ -1,3 +1,4 @@
 npx lint-staged
+lychee --offline --no-progress "src/content/blog/*.md"
 npx astro check
 npm run build
