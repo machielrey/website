@@ -1,62 +1,54 @@
-# Astro Starter Kit: Blog
+# machielreyneke.com
 
-```sh
-npm create astro@latest -- --template blog
+Personal website and blog built with [Astro](https://astro.build), hosted on [Cloudflare Pages](https://pages.cloudflare.com).
+
+## Features
+
+- **Blog** with tags, reading time, and optional table of contents
+- **RSS feed** at `/rss.xml`
+- **SEO** — OpenGraph, Twitter cards, JSON-LD structured data
+- **Performance** — Prefetching, view transitions, static output
+- **Analytics** — Cloudflare Web Analytics (optional)
+- **Dark theme** with syntax highlighting (github-dark)
+
+## Development
+
+```bash
+npm install        # Install dependencies
+npm run dev        # Start dev server at localhost:4321
+npm run build      # Build for production
+npm run preview    # Preview production build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Writing Posts
 
-Features:
+Create `.md` or `.mdx` files in `src/content/blog/`:
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```yaml
+---
+title: 'Post Title'
+description: 'Brief description'
+pubDate: 2026-01-17
+tags: ['tag1', 'tag2'] # Optional
+draft: true # Optional: hides in production
+toc: true # Optional: shows table of contents
+---
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Deployment
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Cloudflare Pages auto-deploys from the `master` branch.
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+## Analytics Setup
 
-Any static assets, like images, can be placed in the `public/` directory.
+To enable Cloudflare Web Analytics, add your token to `src/consts.ts`:
 
-## 🧞 Commands
+```ts
+export const CF_ANALYTICS_TOKEN = 'your-token-here';
+```
 
-All commands are run from the root of the project, from a terminal:
+Get your token from the Cloudflare dashboard under Analytics > Web Analytics.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## License
 
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Content © Machiel Reyneke. Code based on the [Astro Blog template](https://github.com/withastro/astro/tree/main/examples/blog).
