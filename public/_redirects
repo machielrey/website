@@ -1,0 +1,3 @@
+# Redirect legacy .md URLs to clean URLs
+/blog/slate.md/* /blog/slate/ 301
+/blog/breaking-the-feed.md/* /blog/breaking-the-feed/ 301
