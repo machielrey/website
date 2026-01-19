@@ -55,7 +55,7 @@ const posts = await getPublishedPosts();
         {
           posts.slice(0, 3).map((post) => (
             <li>
-              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              <a href={`/blog/${post.id.replace(/\.mdx?$/, '')}/`}>{post.data.title}</a>
             </li>
           ))
         }
