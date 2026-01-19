@@ -159,6 +159,20 @@ hr {
   main {
     padding: 1em;
   }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.4em;
+  }
+  h3 {
+    font-size: 1.2em;
+  }
+  pre {
+    font-size: 0.6em;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 .sr-only {
