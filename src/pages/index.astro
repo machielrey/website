@@ -2,10 +2,38 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { GITHUB_URL, LINKEDIN_URL, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getPublishedPosts } from '../utils/posts';
 
 const posts = await getPublishedPosts();
+
+const projects = [
+  {
+    name: 'Slate',
+    tagline: 'Todo app for ADHD brains',
+    description:
+      'Graph-based task relationships, daily resets, no guilt. Built with Claude Code in three weeks.',
+  },
+  {
+    name: 'Runistry',
+    tagline: 'Analytics for Garmin runners',
+    description: "Because the default dashboards aren't enough.",
+  },
+  {
+    name: "Commander's Intent",
+    tagline: 'AI-powered daily briefing',
+    description: 'Aggregates emails and calendar, synthesizes into actionable morning insights.',
+  },
+  {
+    name: 'Eskom Dashboards',
+    tagline: 'Load shedding visualized',
+    description: "Because checking schedules wasn't painful enough in 2023.",
+  },
+];
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
 ---
 
 <!doctype html>
@@ -16,59 +44,199 @@ const posts = await getPublishedPosts();
   <body>
     <Header />
     <main>
-      <h1>Hey there</h1>
-      <p>I'm Machiel — product manager, tinkerer, occasional writer. Based in South Africa.</p>
-      <p>
-        I work at <a href="https://www.10x.co.za">10X Investments</a>, making smart investing
-        accessible to regular people. Before that: fire engineering, tech startups, and a lot of
-        learning the hard way.
-      </p>
-      <p>
-        This site is where I put things I've built, things I've learned, and things I'm thinking
-        about.
-      </p>
+      <section class="hero">
+        <img src="/machiel.jpg" alt="Machiel Reyneke" class="avatar" />
+        <div class="hero-text">
+          <h1>Machiel Reyneke</h1>
+          <p class="tagline">
+            Fire engineer turned product manager. I build tools for myself and write about what I
+            learn.
+          </p>
+        </div>
+      </section>
 
-      <h2>Projects</h2>
-      <p>
-        Things I've built for myself. Not startups, not products — just tools that solve my own
-        problems.
-      </p>
-      <p>
-        <strong>Slate</strong> — A todo app for ADHD brains and their AI assistants. Graph-based task
-        relationships, daily resets, no guilt. Built with Claude Code in three weeks.
-      </p>
-      <p>
-        <strong>Runistry</strong> — Advanced analytics for Garmin runners. Because the default dashboards
-        aren't enough.
-      </p>
-      <p>
-        <strong>Commander's Intent</strong> — AI-powered daily briefing system. Aggregates emails and
-        calendar, synthesizes into actionable morning insights using Claude.
-      </p>
-      <p>
-        <strong>Eskom Dashboards</strong> — Visualizing South African load shedding and power generation
-        data. Because checking schedules wasn't painful enough in 2023.
-      </p>
+      <section class="currently">
+        <h2>Currently</h2>
+        <p>
+          Leading growth at <a href="https://www.10x.co.za">10X Investments</a>. Building out Slate.
+          Figuring out my next physical challenge.
+        </p>
+      </section>
 
-      <h2>Writing</h2>
-      <ul>
-        {
-          posts.slice(0, 3).map((post) => (
-            <li>
-              <a href={`/blog/${post.id.replace(/\.mdx?$/, '')}/`}>{post.data.title}</a>
-            </li>
-          ))
-        }
-      </ul>
+      <section class="projects">
+        <h2>Projects</h2>
+        <p class="section-intro">
+          Tools I've built for myself — not startups, just solutions to my own problems.
+        </p>
+        <div class="project-grid">
+          {
+            projects.map((project) => (
+              <div class="project-card">
+                <h3>{project.name}</h3>
+                <p class="project-tagline">{project.tagline}</p>
+                <p class="project-description">{project.description}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
 
-      <h2>Elsewhere</h2>
-      <ul>
-        <li>
-          <a href={LINKEDIN_URL}>LinkedIn</a>
-        </li>
-        <li><a href={GITHUB_URL}>GitHub</a></li>
-      </ul>
+      <section class="writing">
+        <h2>Writing</h2>
+        <div class="post-list">
+          {
+            posts.slice(0, 3).map((post) => (
+              <a href={`/blog/${post.id.replace(/\.mdx?$/, '')}/`} class="post-item">
+                <span class="post-title">{post.data.title}</span>
+                <span class="post-meta">
+                  <span class="post-date">{formatDate(post.data.pubDate)}</span>
+                </span>
+                <span class="post-description">{post.data.description}</span>
+              </a>
+            ))
+          }
+        </div>
+        <a href="/blog/" class="view-all">View all posts &rarr;</a>
+      </section>
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .hero-text h1 {
+    margin-bottom: 0.25rem;
+    font-size: 2rem;
+  }
+
+  .tagline {
+    color: rgb(var(--gray));
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  .section-intro {
+    color: rgb(var(--gray));
+    margin-bottom: 1.5rem;
+  }
+
+  .currently p {
+    font-size: 1.1rem;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .project-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+
+  .project-card h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+  }
+
+  .project-tagline {
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .project-description {
+    color: rgb(var(--gray));
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .post-item {
+    display: block;
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    transition: border-color 0.15s ease;
+  }
+
+  .post-item:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .post-title {
+    display: block;
+    color: rgb(var(--black));
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .post-meta {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-date {
+    color: rgb(var(--gray));
+    font-size: 0.85rem;
+  }
+
+  .post-description {
+    display: block;
+    color: rgb(var(--gray));
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .view-all {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .hero-text h1 {
+      font-size: 1.75rem;
+    }
+
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
