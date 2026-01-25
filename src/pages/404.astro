@@ -1,0 +1,61 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="Page Not Found" description="The page you're looking for doesn't exist." />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="not-found">
+        <h1>404</h1>
+        <p>
+          This page doesn't exist. It might have been moved, or you may have followed a broken link.
+        </p>
+        <a href="/" class="home-link">&larr; Back to home</a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .not-found {
+    text-align: center;
+    padding: 4rem 0;
+  }
+
+  h1 {
+    font-size: 6rem;
+    margin: 0 0 1rem 0;
+    color: rgb(var(--gray));
+    line-height: 1;
+  }
+
+  p {
+    color: rgb(var(--gray));
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .home-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    text-decoration: none;
+    color: rgb(var(--gray-dark));
+    transition: all 0.15s ease;
+  }
+
+  .home-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+</style>
