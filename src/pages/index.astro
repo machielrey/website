@@ -63,24 +63,6 @@ function formatDate(date: Date): string {
         </p>
       </section>
 
-      <section class="projects">
-        <h2>Projects</h2>
-        <p class="section-intro">
-          Tools I've built for myself — not startups, just solutions to my own problems.
-        </p>
-        <div class="project-grid">
-          {
-            projects.map((project) => (
-              <div class="project-card">
-                <h3>{project.name}</h3>
-                <p class="project-tagline">{project.tagline}</p>
-                <p class="project-description">{project.description}</p>
-              </div>
-            ))
-          }
-        </div>
-      </section>
-
       <section class="writing">
         <h2>Writing</h2>
         <div class="post-list">
@@ -97,6 +79,24 @@ function formatDate(date: Date): string {
           }
         </div>
         <a href="/blog/" class="view-all">View all posts &rarr;</a>
+      </section>
+
+      <section class="projects">
+        <h2>Projects</h2>
+        <p class="section-intro">
+          Tools I've built for myself — not startups, just solutions to my own problems.
+        </p>
+        <div class="project-grid">
+          {
+            projects.map((project) => (
+              <div class="project-card">
+                <h3>{project.name}</h3>
+                <p class="project-tagline">{project.tagline}</p>
+                <p class="project-description">{project.description}</p>
+              </div>
+            ))
+          }
+        </div>
       </section>
     </main>
     <Footer />
