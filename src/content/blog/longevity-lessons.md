@@ -3,7 +3,6 @@ title: "What the Longevity Experts Don't Tell You"
 description: "I went looking for the common threads among history's most prominent longevity figures. What habits, principles, and practices unite them? Quite a lot, it turns out."
 pubDate: 2026-02-07
 tags: ['essay']
-draft: true
 ---
 
 I've been reading _Titan_, Ron Chernow's biography of John D. Rockefeller, and I was struck by how seriously the man took his health. Here was the richest person on earth, dedicating enormous energy to the project of living longer. It got me thinking about the modern longevity movement — the researchers, biohackers, and doctors who have devoted their lives to helping us live better, longer, and more meaningfully.
