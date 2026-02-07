@@ -8,9 +8,11 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import StructuredData from '../components/StructuredData.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
 import Tag from '../components/Tag.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & {
+  postId?: string;
   readingTime?: string;
   headings?: MarkdownHeading[];
 };
@@ -23,6 +25,7 @@ const {
   heroImage,
   tags = [],
   toc = false,
+  postId,
   readingTime,
   headings = [],
 } = Astro.props;
@@ -85,6 +88,9 @@ const {
         justify-content: center;
         margin-top: 1rem;
       }
+      .tag-link {
+        text-decoration: none;
+      }
     </style>
   </head>
 
@@ -113,7 +119,9 @@ const {
               tags.length > 0 && (
                 <div class="tags">
                   {tags.map((tag) => (
-                    <Tag tag={tag} />
+                    <a href={`/blog/tag/${tag}/`} class="tag-link">
+                      <Tag tag={tag} />
+                    </a>
                   ))}
                 </div>
               )
@@ -122,6 +130,7 @@ const {
           </div>
           {toc && headings.length > 0 && <TableOfContents headings={headings} />}
           <slot />
+          {postId && tags.length > 0 && <RelatedPosts tags={tags} currentId={postId} />}
         </div>
       </article>
     </main>
