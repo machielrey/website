@@ -1,0 +1,160 @@
+---
+interface Photo {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  photos: Photo[];
+}
+
+const { photos } = Astro.props;
+---
+
+<div class="photo-grid">
+  {
+    photos.map((photo, i) => (
+      <div class="photo-item">
+        <a href={`#photo-${i + 1}`} class="photo-link">
+          <img src={photo.src} alt={photo.alt} loading={i < 4 ? 'eager' : 'lazy'} />
+        </a>
+        {photo.caption && <p class="photo-caption">{photo.caption}</p>}
+      </div>
+    ))
+  }
+</div>
+
+{
+  photos.map((photo, i) => (
+    <div id={`photo-${i + 1}`} class="lightbox" data-index={i + 1}>
+      <a href="#" class="lightbox-close" aria-label="Close">
+        &times;
+      </a>
+      <div class="lightbox-content">
+        <img src={photo.src} alt={photo.alt} />
+        <p class="lightbox-caption">{photo.caption || photo.alt}</p>
+      </div>
+    </div>
+  ))
+}
+
+<script define:vars={{ count: photos.length }}>
+  document.addEventListener('keydown', (e) => {
+    const hash = window.location.hash;
+    const match = hash.match(/^#photo-(\d+)$/);
+    if (!match) return;
+
+    const current = parseInt(match[1], 10);
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      window.location.hash = '#';
+    } else if (e.key === 'ArrowRight' && current < count) {
+      e.preventDefault();
+      window.location.hash = `#photo-${current + 1}`;
+    } else if (e.key === 'ArrowLeft' && current > 1) {
+      e.preventDefault();
+      window.location.hash = `#photo-${current - 1}`;
+    }
+  });
+</script>
+
+<style>
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .photo-item {
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+  .photo-link {
+    display: block;
+    cursor: zoom-in;
+  }
+
+  .photo-link img {
+    width: 100%;
+    display: block;
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+  }
+
+  .photo-link:hover img {
+    transform: scale(1.02);
+  }
+
+  .photo-caption {
+    color: rgb(var(--gray));
+    font-size: 0.85rem;
+    margin: 0.5rem 0 0 0;
+    line-height: 1.4;
+  }
+
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.92);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .lightbox:target {
+    display: flex;
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 2.5rem;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 1001;
+    transition: color 0.15s ease;
+  }
+
+  .lightbox-close:hover {
+    color: white;
+  }
+
+  .lightbox-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .lightbox-caption {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  @media (max-width: 720px) {
+    .photo-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .lightbox {
+      padding: 1rem;
+    }
+  }
+</style>

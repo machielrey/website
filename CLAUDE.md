@@ -15,7 +15,8 @@ Personal website and blog for Machiel Reyneke. Built with Astro, hosted on Cloud
 website/
 ├── src/
 │   ├── content/
-│   │   └── blog/           # Blog posts (Markdown/MDX)
+│   │   ├── blog/           # Blog posts (Markdown/MDX)
+│   │   └── photos/         # Photo albums (Markdown)
 │   ├── pages/              # Static pages (about, projects)
 │   ├── layouts/            # Page layouts
 │   └── components/         # Astro components
@@ -54,6 +55,52 @@ draft: true # Optional: hides post in production
 toc: true # Optional: shows table of contents (needs h2/h3 headings)
 ---
 ```
+
+Photo albums go in `src/content/photos/` as `.md` files with frontmatter:
+
+```yaml
+---
+title: 'Album Title'
+description: 'Brief description'
+pubDate: '2026-02-07'
+location: 'City, Country' # Optional
+tags: ['travel', 'landscape'] # Optional
+draft: true # Optional: hides album in production
+cover: 'https://photos.machielreyneke.com/album-slug/cover.webp'
+photos:
+  - src: 'https://photos.machielreyneke.com/album-slug/photo-01.webp'
+    alt: 'Description of the photo'
+    caption: 'Optional caption' # Optional
+---
+```
+
+Photos are hosted on Cloudflare R2 at `photos.machielreyneke.com`. The markdown body is optional narrative text rendered above the photo grid.
+
+### Photo Upload Workflow
+
+Requires: `npx wrangler login` (one-time), ImageMagick (`brew install imagemagick`).
+
+```bash
+# 1. Create output directory
+mkdir -p /tmp/album-upload/{album-slug}
+
+# 2. Resize and convert to WebP (max 2400px, quality 82)
+i=1; for f in /path/to/originals/*.JPEG; do
+  magick "$f" -resize 2400x2400\> -quality 82 /tmp/album-upload/{album-slug}/$(printf "photo-%02d.webp" $i)
+  i=$((i+1))
+done
+
+# 3. Copy one photo as cover
+cp /tmp/album-upload/{album-slug}/photo-03.webp /tmp/album-upload/{album-slug}/cover.webp
+
+# 4. Upload to R2 (bucket name is "photos")
+for f in /tmp/album-upload/{album-slug}/*.webp; do
+  npx wrangler r2 object put "photos/{album-slug}/$(basename $f)" \
+    --file "$f" --content-type image/webp --remote
+done
+```
+
+See `docs/r2-setup.md` for full R2 setup details.
 
 ### Creating New Posts
 

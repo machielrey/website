@@ -1,0 +1,21 @@
+---
+import { type CollectionEntry, render } from 'astro:content';
+import AlbumLayout from '../../layouts/AlbumLayout.astro';
+import { getPublishedAlbums } from '../../utils/albums';
+
+export async function getStaticPaths() {
+  const albums = await getPublishedAlbums();
+  return albums.map((album) => ({
+    params: { slug: album.id.replace(/\.mdx?$/, '') },
+    props: album,
+  }));
+}
+type Props = CollectionEntry<'photos'>;
+
+const album = Astro.props;
+const { Content } = await render(album);
+---
+
+<AlbumLayout {...album.data}>
+  <Content />
+</AlbumLayout>

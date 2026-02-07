@@ -3,9 +3,12 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getPublishedAlbums } from '../utils/albums';
 import { getPublishedPosts } from '../utils/posts';
 
 const posts = await getPublishedPosts();
+const albums = await getPublishedAlbums();
+const latestAlbum = albums[0];
 
 const projects = [
   {
@@ -80,6 +83,30 @@ function formatDate(date: Date): string {
         </div>
         <a href="/blog/" class="view-all">View all posts &rarr;</a>
       </section>
+
+      {
+        latestAlbum && (
+          <section class="photos-section">
+            <h2>Photos</h2>
+            <a href={`/photos/${latestAlbum.id.replace(/\.mdx?$/, '')}/`} class="featured-album">
+              <img
+                src={latestAlbum.data.cover}
+                alt={latestAlbum.data.title}
+                class="featured-album-img"
+              />
+              <div class="featured-album-overlay">
+                <span class="featured-album-title">{latestAlbum.data.title}</span>
+                {latestAlbum.data.location && (
+                  <span class="featured-album-location">{latestAlbum.data.location}</span>
+                )}
+              </div>
+            </a>
+            <a href="/photos/" class="view-all">
+              View all albums &rarr;
+            </a>
+          </section>
+        )
+      }
 
       <section class="projects">
         <h2>Projects</h2>
@@ -222,6 +249,49 @@ function formatDate(date: Date): string {
     display: inline-block;
     margin-top: 1rem;
     font-size: 0.95rem;
+  }
+
+  .featured-album {
+    display: block;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    aspect-ratio: 16 / 9;
+  }
+
+  .featured-album-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-album:hover .featured-album-img {
+    transform: scale(1.03);
+  }
+
+  .featured-album-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 1.25rem 1.25rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .featured-album-title {
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+
+  .featured-album-location {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
   }
 
   @media (max-width: 720px) {
