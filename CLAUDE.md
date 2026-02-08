@@ -56,6 +56,11 @@ toc: true # Optional: shows table of contents (needs h2/h3 headings)
 ---
 ```
 
+**SEO notes for frontmatter:**
+
+- **title**: Used in `<title>` tag as `{title} | Machiel Reyneke`. Write for humans first, but include searchable terms. Cryptic titles (e.g. "18:57") are fine for style but consider whether someone would find the post via search.
+- **description**: Used as `<meta description>` — appears in Google search results. Keep it ~120-155 characters, compelling enough to click. This is not a summary; it's a pitch for why someone should read the post.
+
 Photo albums go in `src/content/photos/` as `.md` files with frontmatter:
 
 ```yaml

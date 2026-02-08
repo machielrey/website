@@ -4,7 +4,6 @@ import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import Tag from '../../components/Tag.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import { getPublishedPosts } from '../../utils/posts';
 
 const posts = await getPublishedPosts();
@@ -22,7 +21,10 @@ const sortedTags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead
+      title="Blog"
+      description="Writing about software, AI, running, and the tools I build."
+    />
   </head>
   <body>
     <Header />

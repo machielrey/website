@@ -3,7 +3,6 @@ import AlbumCard from '../../components/AlbumCard.astro';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
-import { SITE_TITLE } from '../../consts';
 import { getPublishedAlbums } from '../../utils/albums';
 
 const albums = await getPublishedAlbums();
@@ -12,10 +11,7 @@ const albums = await getPublishedAlbums();
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead
-      title={`Photos — ${SITE_TITLE}`}
-      description="Photo albums from travels and adventures."
-    />
+    <BaseHead title="Photos" description="Photo albums from travels and adventures." />
   </head>
   <body>
     <Header />
